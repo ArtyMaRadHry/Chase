@@ -4,7 +4,7 @@ const SPEED_UP_PER_BOOST = 20
 
 var dead = false
 var speed = 250
-var direction = Vector2.RIGHT
+var direction = Vector2.UP
 
 
 # kolik sekund ma jeste nitro
@@ -20,7 +20,7 @@ var touch_base = Vector2.ZERO
 var touch_enabled = false
 
 func _enter_tree() -> void:
-	$Anim.play('default')
+	$Shape/Anim.play('default')
 	var score = get_parent().get_node("GUI/Score")
 	score.text = str(Game.points)
 	
@@ -30,17 +30,19 @@ func _enter_tree() -> void:
 func die() -> void:
 	dead = true
 	collision_layer = 0
-	$Anim.stop()
+	$Shape/Anim.stop()
 	$Ouch.show()
 
 func _input(event: InputEvent) -> void:
-	if event.is_action('ui_cancel'):
+	if event.is_action_pressed('ui_cancel'):
+		get_tree().set_input_as_handled()
 		get_tree().change_scene("res://Menu.tscn")
 		Game.reset()
 		return
 	
 	if dead:
-		if event.is_action('ui_accept'):
+		if event.is_action_pressed('ui_accept'):
+			get_tree().set_input_as_handled()
 			get_tree().change_scene("res://Menu.tscn")
 			Game.reset()
 		
@@ -67,23 +69,30 @@ func _input(event: InputEvent) -> void:
 		else:
 			touch_enabled = false
 	
-	if event.is_action_pressed('ui_left'):
-		direction = Vector2.LEFT
-	elif event.is_action_pressed('ui_right'):
-		direction = Vector2.RIGHT
-	elif event.is_action_pressed('ui_up'):
-		direction = Vector2.UP
-	elif event.is_action_pressed('ui_down'):
-		direction = Vector2.DOWN
+	var left = event.get_action_strength("ui_left")
+	var right = event.get_action_strength("ui_right")
+	var up = event.get_action_strength("ui_up")
+	var down = event.get_action_strength("ui_down")
+	
+	if max(left, right) > max(up, down):
+		if left > 0.7 and left > right:
+			direction = Vector2.LEFT
+		elif right > 0.7:
+			direction = Vector2.RIGHT
+	else:
+		if up > 0.7 and up > down:
+			direction = Vector2.UP
+		elif down > 0.7:
+			direction = Vector2.DOWN
 	
 	if direction == Vector2.LEFT:
-		$Anim.rotation_degrees = -180
+		$Shape.rotation_degrees = -90
 	elif direction == Vector2.RIGHT:
-		$Anim.rotation_degrees = 0
+		$Shape.rotation_degrees = 90
 	elif direction == Vector2.UP:
-		$Anim.rotation_degrees = -90
+		$Shape.rotation_degrees = 0
 	elif direction == Vector2.DOWN:
-		$Anim.rotation_degrees = 90
+		$Shape.rotation_degrees = 180
 	
 	$Ouch.rect_rotation = -rotation_degrees
 
