@@ -6,6 +6,7 @@ var dead = false
 var speed = 250
 var direction = Vector2.UP
 
+var acking_death = 0.0
 
 # kolik sekund ma jeste nitro
 var boost = 0
@@ -41,6 +42,12 @@ func _input(event: InputEvent) -> void:
 		return
 	
 	if dead:
+		if event is InputEventMouse:
+			if event.button_mask:
+				acking_death = 0.01
+			else:
+				acking_death = 0.0
+		
 		if event.is_action_pressed('ui_accept'):
 			get_tree().set_input_as_handled()
 			get_tree().change_scene("res://Menu.tscn")
@@ -97,6 +104,12 @@ func _input(event: InputEvent) -> void:
 	$Ouch.rect_rotation = -rotation_degrees
 
 func _physics_process(delta: float) -> void:
+	if acking_death:
+		acking_death += delta
+		if acking_death > 1.5:
+			get_tree().change_scene("res://Menu.tscn")
+			Game.reset()
+	
 	if dead:
 		return
 	
