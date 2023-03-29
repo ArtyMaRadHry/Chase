@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Audiorezout - Another Road - 15 - Catch.mp3-10119cd3095e6ea8a92c738497144191.mp3str"
+
+[deps]
+
+source_file="res://music/Audiorezout - Another Road - 15 - Catch.mp3"
+dest_files=[ "res://.import/Audiorezout - Another Road - 15 - Catch.mp3-10119cd3095e6ea8a92c738497144191.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

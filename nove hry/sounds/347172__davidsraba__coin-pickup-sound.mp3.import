@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/347172__davidsraba__coin-pickup-sound.mp3-9a2846ec8c9c9a5baa360483daa01acc.mp3str"
+
+[deps]
+
+source_file="res://sounds/347172__davidsraba__coin-pickup-sound.mp3"
+dest_files=[ "res://.import/347172__davidsraba__coin-pickup-sound.mp3-9a2846ec8c9c9a5baa360483daa01acc.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

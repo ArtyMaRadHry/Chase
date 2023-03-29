@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/metal-design-explosion-13491.mp3-97155428c5847a237090778970512c59.mp3str"
+
+[deps]
+
+source_file="res://sounds/metal-design-explosion-13491.mp3"
+dest_files=[ "res://.import/metal-design-explosion-13491.mp3-97155428c5847a237090778970512c59.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
